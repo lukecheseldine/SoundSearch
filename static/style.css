@@ -1,0 +1,177 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* 
+----------- BEGIN PAGE STYLING -----------
+*/
+
+a {
+    text-decoration: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: black;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    background-color: #f4a261;
+    padding: 10px;
+    font-size: 2rem;
+}
+
+nav a {
+    color: black;
+}
+
+nav > .logo {
+    margin-right: auto;
+}
+
+nav > ul {
+    display: flex;
+    gap: 20px;
+}
+
+nav > ul > li {
+    font-size: 1.5rem;
+    display: inline;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-image: url('img/hero.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    flex: 1;
+}
+
+.hero h1 {
+    font-size: 3rem;
+}
+
+.hero a {
+    border-radius: 5px;
+    border: 0px;
+    background-color: #f4a361ce;
+    padding: 20px;
+    font-size: 2rem;
+    color: black;
+}
+
+.hero a:hover {
+    background-color: #f4a261;
+    cursor: pointer;
+}
+
+footer {
+    margin-top: auto;
+    align-self: stretch;
+    background-color: #f4a261;
+    text-align: center;
+    padding: 10px;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    gap: 5px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container a {
+    background-color: #f4a361ce;
+    border: 0px;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    align-self: stretch;
+}
+
+.container a:hover {
+    background-color: #f4a261;
+}
+
+.container hr {
+    width: 100px;
+    border: 2px solid white;
+    border-radius: 3px;
+}
+
+.container a:last-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    background-color: rgba(51, 51, 51, 0.753);
+}
+
+.container a:last-child:hover {
+    background-color: rgba(51, 51, 51);
+}
+
+.container a img {
+    height: 30px;
+}
+
