@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}SoundSearch{% endblock %}
+
+{% block links %}{% endblock %}
+{% block scripts %}{% endblock %}
+
+
+{% block content %}
+    
+    <div class="hero">
+        <div class="container">
+            <form class="login-register" action="{{ url_for('register') }}" method="POST" autocomplete="off" autocapitalize="off">
+                <h2>Create an account</h2>
+                <div>{{ form.username.label}} {{ form.username }}</div>
+                <div>{{ form.email.label }} {{form.email}} </div>
+                <div>{{ form.password.label }} {{form.password}}</div>
+                <div>{{ form.confirm.label }} {{form.confirm}}</div>
+                <button type="submit">Create account</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    {% block links %}{% endblock %}
+    {% block links %}
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    {% endblock %}
     {% block scripts %}{% endblock %}
 </head>
 <body>
@@ -15,9 +20,15 @@
             <a href="{{ url_for('index') }}">SoundSearch</a>
         </div>
         <ul>
-            <li>Link spotify</li>
-            <li>Create an account</li>
-            <li>Sign in</li>
+            <a href="#">
+                <li>Link spotify</li>
+            </a>
+            <a href="{{ url_for('register') }}">
+                <li>Create an account</li>
+            </a>
+            <a href="{{ url_for('login') }}">
+                <li>Sign in</li>
+            </a>
         </ul>
     </nav>
 

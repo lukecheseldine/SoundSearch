@@ -1,6 +1,7 @@
 from crypt import methods
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 import config
+from forms import RegistrationForm, LoginForm
 
 app = Flask(__name__)
 app.config.from_object("config")
@@ -11,19 +12,27 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/landing", methods=["GET", "POST"])
+@app.route("/landing", methods=["GET"])
 def landing():
     return render_template("landing.html")
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return "Log in"
+    if request.method == "GET":
+        form = LoginForm()
+        return render_template('login.html', form=form)
+    else:
+        return "POST"
 
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
-    return "Register"
+    if request.method == "GET":
+        form = RegistrationForm()
+        return render_template('register.html', form=form)
+    else:
+        return "POST"
 
 
 @app.route('/authorize', methods=['POST'])

@@ -60,6 +60,7 @@ body {
     flex-direction: column;
     height: 100vh;
     background-color: black;
+    font-family: 'Nunito', sans-serif;
 }
 
 nav {
@@ -67,7 +68,6 @@ nav {
     align-items: center;
     background-color: #f4a261;
     padding: 10px;
-    font-size: 2rem;
 }
 
 nav a {
@@ -76,15 +76,16 @@ nav a {
 
 nav > .logo {
     margin-right: auto;
+    font-size: 2rem;
 }
 
 nav > ul {
     display: flex;
     gap: 20px;
+    font-size: 1.2rem;
 }
 
 nav > ul > li {
-    font-size: 1.5rem;
     display: inline;
 }
 
@@ -174,4 +175,57 @@ footer {
 .container a img {
     height: 30px;
 }
+
+.login-register {
+    background-color: #f4a361ce;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: clamp(200px, 30vw, 400px);
+}
+
+.login-register h2 {
+    font-size: 2.5rem;
+}
+
+.login-register div {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-register label {
+    font-size: 1.2rem;
+}
+
+.login-register input {
+    padding: 8px;
+    background-color: rgba(51, 51, 51, 0.753);
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.login-register input:focus, .login-register input:active, .login-register input:hover {
+    background-color: rgb(51, 51, 51);
+    outline: none;
+}
+
+.login-register button {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: rgba(51, 51, 51, 0.753);
+    color: white;
+    font-size: 1.5rem;
+}
+
+.login-register button:hover, .login-register button:active, .login-register button:focus {
+    background-color: rgb(51, 51, 51);
+    outline: none;
+    cursor: pointer;
+}
+
 
