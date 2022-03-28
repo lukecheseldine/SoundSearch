@@ -3,7 +3,9 @@
 {% block title %}SoundSearch{% endblock %}
 
 {% block links %}{% endblock %}
-{% block scripts %}{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='scripts/register.js') }}" defer></script>
+{% endblock %}
 
 
 {% block content %}
@@ -12,9 +14,28 @@
         <div class="container">
             <form class="login-register" action="{{ url_for('register') }}" method="POST" autocomplete="off" autocapitalize="off">
                 <h2>Create an account</h2>
-                <div>{{ form.username.label}} {{ form.username }}</div>
-                <div>{{ form.email.label }} {{form.email}} </div>
-                <div>{{ form.password.label }} {{form.password}}</div>
+                <div class="email">
+                    {{ form.email.label }} 
+                    {{form.email}}
+                    {% if form.email.errors %}
+                        <div class="error-label">
+                            {% for error in form.email.errors %}
+                                * {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>  
+                <div class="password">
+                    {{ form.password.label }} 
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                        <div class="error-label">
+                            {% for error in form.password.errors %}
+                                * {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
                 <div>{{ form.confirm.label }} {{form.confirm}}</div>
                 <button type="submit">Create account</button>
             </form>

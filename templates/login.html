@@ -12,7 +12,7 @@
         <div class="container">
             <form class="login-register" action="{{ url_for('login') }}" method="POST" autocomplete="off" autocapitalize="off">
                 <h2>Log in</h2>
-                <div>{{ form.username.label}} {{ form.username }}</div>
+                <div>{{ form.email.label}} {{ form.email }}</div>
                 <div>{{ form.password.label }} {{form.password}}</div>
                 <button type="submit">Log in</button>
             </form>

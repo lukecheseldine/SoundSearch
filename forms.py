@@ -1,14 +1,10 @@
 from email import message
 import email_validator
-from wtforms import Form, StringField, PasswordField, validators, EmailField
+from wtforms import Form, StringField, PasswordField, validators
 
 class RegistrationForm(Form):
-    username = StringField('Username', [
-        validators.Length(max=25, message="Username must be less than 25 characters"),
-        validators.DataRequired()
-    ])
-    email = EmailField('Email', [
-        validators.Email(message="Please use a valid email address"),
+    email = StringField('Email', [
+        validators.Email(message='Invalid email address'),
         validators.DataRequired()
     ])
     password = PasswordField('Password', [
@@ -19,9 +15,10 @@ class RegistrationForm(Form):
         validators.DataRequired()
     ])
 
+
 class LoginForm(Form):
-    username = StringField('Username', [
-        validators.Length(max=25, message="Username must be less than 25 characters"),
+    email = StringField('Email', [
+        validators.Email(message='Invalid email address'),
         validators.DataRequired()
     ])
     password = PasswordField('Password', [

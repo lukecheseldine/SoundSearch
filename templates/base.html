@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     {% endblock %}
+    <script src="{{ url_for('static', filename='scripts/script.js') }}" defer></script>
     {% block scripts %}{% endblock %}
 </head>
 <body>
@@ -19,18 +20,38 @@
         <div class="logo">
             <a href="{{ url_for('index') }}">SoundSearch</a>
         </div>
+
         <ul>
             <a href="#">
                 <li>Link spotify</li>
             </a>
-            <a href="{{ url_for('register') }}">
-                <li>Create an account</li>
-            </a>
-            <a href="{{ url_for('login') }}">
-                <li>Sign in</li>
-            </a>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}">
+                    <li>Log out</li>
+                </a>
+            {% else %}
+                <a href="{{ url_for('register') }}">
+                    <li>Create an account</li>
+                </a>
+
+                <a href="{{ url_for('login') }}">
+                    <li>Sign in</li>
+                </a>
+            {% endif %}
         </ul>
+
     </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}"">
+                    <span>{{ message }}</span>
+                    <button type="button" class="close">X</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
     {% block content %}{% endblock %}
 
