@@ -1,5 +1,6 @@
 import email
-from flask import Flask, render_template, redirect, request, url_for, abort, flash 
+from email.policy import default
+from flask import Flask, render_template, redirect, request, session, url_for, abort, flash 
 import config
 from forms import RegistrationForm, LoginForm
 from requests import get, post
@@ -26,6 +27,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     linked = db.Column(db.Boolean, default=False, nullable=False)
+    spotify_refresh_token = db.Column(db.String(), default=None)
 
     def __repr__(self):
         return '<User %r>' % self.email
@@ -61,6 +63,9 @@ def login():
                 form.email.errors.append('Incorrect email or password')
                 return render_template('login.html', form=form)
 
+            if user.linked:
+                user.linked = 0
+                db.session.commit()
             login_user(user)
             
             next = request.args.get('next')
@@ -74,6 +79,8 @@ def login():
 @app.route("/logout")
 @login_required
 def logout():
+    current_user.linked = 0
+    db.session.commit()
     logout_user()
     flash("Log out successful!", "success")
     return redirect(url_for('index'))
@@ -104,8 +111,17 @@ def register():
 
 
 @app.route("/home")
+@login_required
 def home():
-    return render_template("home.html")
+    if current_user.linked:
+        url = 'https://api.spotify.com/v1/me'
+        headers = {'Authorization' : f'Bearer {session.get("spotify_access_token")}'}
+        response = get(url=url, headers=headers).json()
+        print(response)
+        return render_template('home.html', name=response['display_name'])
+    else:
+        return render_template('home.html')
+    
 
 
 @app.route("/authorize", methods=["POST", "GET"])
@@ -142,7 +158,12 @@ def callback():
         response_data = response.json()
         access_token = response_data['access_token']
 
-        return f'{access_token}'
+        current_user.linked = 1
+        db.session.commit()
+
+        session['spotify_access_token'] = access_token
+
+        return redirect(url_for('home'))
 
 
 if __name__ == '__main__':

@@ -22,9 +22,11 @@
         </div>
 
         <ul>
-            <a href="#">
-                <li>Link spotify</li>
-            </a>
+            {% if not current_user.linked %}
+                <a href="#">
+                    <li>Link spotify</li>
+                </a>
+            {% endif %}
             {% if current_user.is_authenticated %}
                 <a href="{{ url_for('logout') }}">
                     <li>Log out</li>

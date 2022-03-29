@@ -159,6 +159,20 @@ nav > ul > li {
     cursor: pointer;
 }
 
+#spotify {
+    display: flex;
+    align-items: center;
+    border-radius: 35px;
+    padding: 15px;
+    gap: 15px;
+    color: white;
+    background-color: rgb(29, 29, 29);
+}
+
+#spotify:hover {
+    background-color: rgba(29, 29, 29, 0.93);
+}
+
 footer {
     margin-top: auto;
     align-self: stretch;

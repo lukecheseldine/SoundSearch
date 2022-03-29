@@ -10,7 +10,20 @@
     
     <div class="hero">
         <h1>Home</h1>
-        <h2>{{ current_user.email }}</h2>
+        {% if current_user.linked %}
+            <h2>{{ name }}</h2>
+        {% endif %}
+
+        {% if not current_user.linked %}
+            <a id="spotify" href="{{ url_for('authorize') }}">
+                <img height="40px" src="{{ url_for('static', filename='img/spotify-logo.png') }}" alt="">
+                Link Spotify
+            </a>
+        {% else %}
+            <!-- give options of spotify library for recommendations -->
+        {% endif %}
     </div>
+
+    
     
 {% endblock %}
