@@ -9,6 +9,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from is_safe_url import is_safe_url
+from pprint import pprint
+import calendar
 
 
 
@@ -28,6 +30,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(60), nullable=False)
     linked = db.Column(db.Boolean, default=False, nullable=False)
     spotify_refresh_token = db.Column(db.String(), default=None)
+    zipcode = db.Column(db.Integer(), default=90210)
 
     def __repr__(self):
         return '<User %r>' % self.email
@@ -117,11 +120,91 @@ def home():
         url = 'https://api.spotify.com/v1/me'
         headers = {'Authorization' : f'Bearer {session.get("spotify_access_token")}'}
         response = get(url=url, headers=headers).json()
-        print(response)
         return render_template('home.html', name=response['display_name'])
     else:
         return render_template('home.html')
+
+
+@app.route("/followed_artists")
+@login_required
+def followed_artists():
+
+    if not current_user.linked:
+        flash('Please link your Spotify first', 'danger')
+        return redirect(url_for('home'))
     
+    # get followed artists
+    url = 'https://api.spotify.com/v1/me/following'
+    params = {
+        'type': 'artist',
+    }
+    headers = {
+            'Accept': 'application/json',
+            'Authorization': f'Bearer {session.get("spotify_access_token")}',
+            'Content-Type': 'application/json'
+        }
+    response = get(url=url, headers=headers, params=params).json()
+    artists = response['artists']['items']
+    
+    return render_template('home.html', current_user=current_user, artists=artists)
+    
+
+
+@app.route('/recommendations/artist/<string:artist>/<int:zipcode>')
+def get_artist_recommendations(artist, zipcode):
+
+    url = 'https://api.seatgeek.com/2/performers'
+    params = {
+        'q': artist,
+        'client_id': app.config['SEATGEEK_CLIENT_ID']
+    }
+    response = get(url, params=params).json()
+
+    performer_id = None
+    for performer in response['performers']:
+        if performer['name'].lower() == artist.lower():
+            performer_id = str(performer['id'])
+    
+    if not performer_id:
+        return "Recommendations not available"
+    
+    url = 'https://api.seatgeek.com/2/recommendations'
+    params = {
+        'performers.id': performer_id,
+        'postal_code': str(zipcode),
+        'client_id': app.config['SEATGEEK_CLIENT_ID']
+    }
+    response = get(url, params=params).json()
+
+    recommendations = []
+    for event in response['recommendations']:
+        event = event['event']
+        
+        performers = []
+        for performer in event['performers']:
+            # api can have repeats sometimes, filter these out
+            if performer['name'] not in performers:
+                performers.append(performer['name'])
+        
+        image = None
+        if event['performers'][0]['images']:
+            image = event['performers'][0]['images']['huge']
+
+        year = event['datetime_local'][:4]
+        month = calendar.month_name[int(event['datetime_local'][5:7])]
+        day = event['datetime_local'][8:10]
+        date = f'{month} {day}, {year}'
+
+        performance = {
+            'performers': performers,
+            'date': date,
+            'venue': event['venue']['name'],
+            'image': image,
+            'url': event['url']
+        }
+        recommendations.append(performance)
+        
+    return render_template('recommendations.html', seed=artist, recommendations=recommendations)
 
 
 @app.route("/authorize", methods=["POST", "GET"])

@@ -59,7 +59,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-color: black;
     font-family: 'Nunito', sans-serif;
 }
@@ -139,10 +139,15 @@ nav > ul > li {
     background-position: center;
     color: white;
     flex: 1;
+    padding: 50px;
 }
 
 .hero h1 {
     font-size: 3rem;
+}
+
+.hero h2 {
+    font-size: 2rem;
 }
 
 .hero a {
@@ -157,6 +162,52 @@ nav > ul > li {
 .hero a:hover {
     background-color: #f4a261;
     cursor: pointer;
+}
+
+.artists, .recommendations {
+    max-width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    background-color: #f4a361ce;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.artist, .recommendation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    gap: 10px;
+    flex: 1;
+    text-align: center;
+}
+
+.artist a, .recommendation a {
+    padding: 0;
+    background-color: inherit;
+    font: inherit;
+    color: white;
+}
+
+.artist a:hover, .recommendation a:hover {
+    background: none;
+}
+
+.recommendation h5 {
+    font-size: 1.5em;
+}
+
+.artist span, .recommendation span {
+    max-width: 150px;
+}
+
+.artist img, .recommendation img {
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
 }
 
 #spotify {

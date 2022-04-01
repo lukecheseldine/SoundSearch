@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}SoundSearch{% endblock %}
+
+{% block links %}{% endblock %}
+{% block scripts %}{% endblock %}
+
+{% macro capitalize(text) %}
+    {% set words = text.split(' ') %}
+    {% for word in words %}
+        {{ word[0]|upper}}{{word[1:] }}
+    {% endfor %}
+{% endmacro %}
+
+{% block content %}
+    
+    <div class="hero">
+        <h1>Recommendations for {{ capitalize(seed) }}</h1>
+        <div class="recommendations">
+            {% for recommendation in recommendations %}
+    
+                <div class="recommendation">
+
+                    <h5 class="main-performer"><a href="{{ recommendation['url'] }}">{{ recommendation['performers'][0] }}</a></h5>
+                    <a href="{{ recommendation['url'] }}"><img src="{{ recommendation['image'] }}" alt=""></a>
+                    <span class="date">{{ recommendation['date'] }}</span>
+                    <span class="venue">{{ recommendation['venue'] }}</span>
+
+                </div>
+            {% endfor %}
+        </div>
+        
+
+    </div>
+
+{% endblock %}
