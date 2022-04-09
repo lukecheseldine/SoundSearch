@@ -2,8 +2,12 @@
 
 {% block title %}SoundSearch{% endblock %}
 
-{% block links %}{% endblock %}
-{% block scripts %}{% endblock %}
+{% block links %}
+    <link href="{{ url_for('static', filename='all.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
 
 {% macro capitalize(text) %}
     {% set words = text.split(' ') %}
@@ -29,7 +33,20 @@
                 </div>
             {% endfor %}
         </div>
-        
+
+        <div class="buttons">
+                
+            <a href="{{ url_for('followed_artists') }}">Back</a>
+
+            <form action="{{ url_for('update_zipcode') }}">
+                <div>
+                    <label for="zipcode">Change zipcode</label>
+                    <input type="text" placeholder="90210" name="zipcode" id="zipcode">
+                </div>
+                <button formmethod="POST" type="submit"><i class="fa-solid fa-magnifying-glass-location fa-2xl"></i></button>
+            </form>
+
+        </div>
 
     </div>
 

@@ -6,13 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    {% block links %}
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
-    {% endblock %}
+    {% block links %}{% endblock %}
     <script src="{{ url_for('static', filename='scripts/script.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/b189300f24.js" crossorigin="anonymous"></script>
     {% block scripts %}{% endblock %}
 </head>
 <body>
@@ -22,6 +18,9 @@
         </div>
 
         <ul>
+            <a href="{{ url_for('home') }}">
+                <li>Home</li>
+            </a>
             {% if not current_user.linked %}
                 <a href="#">
                     <li>Link spotify</li>

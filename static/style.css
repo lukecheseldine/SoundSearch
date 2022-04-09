@@ -164,6 +164,10 @@ nav > ul > li {
     cursor: pointer;
 }
 
+.get-recommendations {
+    margin-top: 40px;
+}
+
 .artists, .recommendations {
     max-width: 80%;
     display: flex;
@@ -179,6 +183,7 @@ nav > ul > li {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 200px;
     margin: 20px 0;
     gap: 10px;
     flex: 1;
@@ -190,6 +195,7 @@ nav > ul > li {
     background-color: inherit;
     font: inherit;
     color: white;
+    justify-self: center;
 }
 
 .artist a:hover, .recommendation a:hover {
@@ -198,6 +204,7 @@ nav > ul > li {
 
 .recommendation h5 {
     font-size: 1.5em;
+    margin-bottom: auto;
 }
 
 .artist span, .recommendation span {
@@ -208,6 +215,63 @@ nav > ul > li {
     width: 150px;
     height: 150px;
     border-radius: 150px;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.buttons a {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.buttons form {
+    background-color: #f4a361ce;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.buttons form label {
+    font-size: 1.5rem;
+}
+
+.buttons form input {
+    padding: 8px;
+    background-color: rgba(51, 51, 51, 0.753);
+    border: none;
+    border-radius: 3px;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.buttons input:focus, .buttons input:active, .buttons input:hover {
+    background-color: rgb(51, 51, 51);
+    outline: none;
+}
+
+.buttons form div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.buttons form button {
+    background: none;
+    border: none;
+    border-radius: 33px;
+    height: 50px;
+    margin-left: 20px;
+}
+
+.buttons form button:hover {
+    background-color: #f4a261;
+    cursor: pointer;
 }
 
 #spotify {

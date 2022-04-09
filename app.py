@@ -1,3 +1,4 @@
+from crypt import methods
 import email
 from email.policy import default
 from flask import Flask, render_template, redirect, request, session, url_for, abort, flash 
@@ -207,7 +208,12 @@ def get_artist_recommendations(artist, zipcode):
     return render_template('recommendations.html', seed=artist, recommendations=recommendations)
 
 
-@app.route("/authorize", methods=["POST", "GET"])
+@app.route('/update_zipcode', methods=['POST'])
+def update_zipcode():
+    zipcode = request.form.get('zipcode')
+    return f'{zipcode}'
+
+@app.route('/authorize', methods=['POST', 'GET'])
 def authorize():
     client_id = app.config["SPOTIFY_CLIENT_ID"]
     redirect_uri = app.config["SPOTIFY_REDIRECT_URI"]
